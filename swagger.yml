@@ -1,0 +1,163 @@
+swagger: "2.0"
+info:
+  description: Swagger file
+  version: "1.0.0"
+  title: Swagger ReST Clientes
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /clientes:
+    get:
+      operationId: clientes.read_all
+      tags:
+        - Clientes
+      summary: Lista de clientes
+      description: Lista de clientes
+      responses:
+        200:
+          description: Sucesso na leitura de clientes
+          schema:
+            type: array
+            items:
+              properties:
+                cpf:
+                  type: string
+                nome:
+                  type: string                
+                ddd:
+                  type: string
+                tel:
+                  type: string             
+                placa:
+                  type: string
+                tipoVeiculo:
+                  type: string                
+                carroceria:
+                  type: string
+
+    post:
+      operationId: clientes.create
+      tags:
+        - Clientes
+      summary: Cria uma pessoa e adiciona na lista de clientes
+      description: Adiciona na lista de clientes
+      parameters:
+        - name: person
+          in: body
+          description: Pessoa a ser criada
+          required: True
+          schema:
+            type: object
+            properties:
+              cpf:
+                type: string
+                description: CPF
+              nome:
+                type: string
+                description: Nome                  
+              ddd:
+                type: string
+                description: DDD
+              tel:
+                type: string
+                description: Telefone
+              placa:
+                type: string
+                description: Placa do Veículo
+              tipoVeiculo:
+                type: string
+                description: Tipo do veículo         
+              carroceria:
+                type: string
+                description: Carroceria
+      responses:
+        201:
+          description: Sucesso ao criar
+
+  /clientes/{cpf}:
+    get:
+      operationId: clientes.read_one
+      tags:
+        - Clientes
+      summary: Leitura de uma pessoa da lista de clientes
+      description: Leitura de uma pessoa
+      parameters:
+        - name: cpf
+          in: path
+          description: CPF
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso na leitura de uma pessoa
+          schema:
+            properties:
+              cpf:
+                type: string
+              nome:
+                type: string                
+              ddd:
+                type: string
+              tel:
+                type: string             
+              placa:
+                type: string
+              tipoVeiculo:
+                type: string                
+              carroceria:
+                type: string
+
+    put:
+      operationId: clientes.update
+      tags:
+        - Clientes
+      summary: Update na lista de clientes
+      description: Update na lista
+      parameters:
+        - name: cpf
+          in: path
+          description: CPF
+          type: string
+          required: True
+        - name: person
+          in: body
+          schema:
+            type: object
+            properties:
+              cpf:
+                type: string
+              nome:
+                type: string                
+              ddd:
+                type: string
+              tel:
+                type: string             
+              placa:
+                type: string
+              tipoVeiculo:
+                type: string                
+              carroceria:
+                type: string
+      responses:
+        200:
+          description: Sucesso ao atualizar
+
+    delete:
+      operationId: clientes.delete
+      tags:
+        - Clientes
+      summary: Deletar uma pessoa na lista de clientes
+      description: Deleta uma pessoa
+      parameters:
+        - name: cpf
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Sucesso ao deletar
